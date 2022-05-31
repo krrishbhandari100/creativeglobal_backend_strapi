@@ -1,0 +1,36 @@
+{
+  "kind": "collectionType",
+  "collectionName": "orders",
+  "info": {
+    "singularName": "order",
+    "pluralName": "orders",
+    "displayName": "Order"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "products": {
+      "type": "json"
+    },
+    "orderCost": {
+      "type": "float"
+    },
+    "promocode": {
+      "type": "string"
+    },
+    "finalCost": {
+      "type": "float"
+    },
+    "orderId": {
+      "type": "float"
+    },
+    "checksum": {
+      "type": "json"
+    },
+    "status": {
+      "type": "string"
+    }
+  }
+}

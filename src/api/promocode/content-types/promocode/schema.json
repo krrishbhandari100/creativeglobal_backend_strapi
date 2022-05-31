@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "promocodes",
+  "info": {
+    "singularName": "promocode",
+    "pluralName": "promocodes",
+    "displayName": "Promocode",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "promocode": {
+      "type": "string"
+    },
+    "Llimit": {
+      "type": "float"
+    },
+    "Ulimit": {
+      "type": "float"
+    },
+    "discount": {
+      "type": "float"
+    }
+  }
+}
