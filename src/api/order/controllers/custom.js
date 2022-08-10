@@ -6,6 +6,7 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
     // Method 1: Creating an entirely custom action
     async pre(ctx) {
         let { email, address, pincode, notes, promocode, products, orderId, orderCost, finalCost } = ctx.request.body;
+        // console.log(ctx.request.body);
         var paytmParams = {};
         paytmParams.body = {
             "requestType": "Payment",
@@ -31,6 +32,9 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 
         const getToken = async () => {
             return new Promise((resolve, reject) => {
+                console.log('getToken');
+                console.log(process.env.PAYTM_HOST);
+                console.log(process.env.PAYTM_MID);
                 var options = {
 
                     /* for Staging */
@@ -50,11 +54,19 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
 
                 var response = "";
                 var post_req = https.request(options, function (post_res) {
+
+                    // promice reject
+                    post_res.on('error', function (err) {
+                        console.log(err);
+                        reject(err);
+                    })
+
                     post_res.on('data', function (chunk) {
                         response += chunk;
                     });
 
                     post_res.on('end', function () {
+                        console.log(response);
                         resolve(JSON.parse(response).body);
                     });
                 });
@@ -72,7 +84,8 @@ module.exports = createCoreController('api::order.order', ({ strapi }) => ({
                 promocode: promocode,
                 finalCost: finalCost,
                 orderId: orderId,
-                status: "Pending"
+                status: "Pending",
+                email: email
             },
         });
         ctx.body = token;
